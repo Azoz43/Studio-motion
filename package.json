@@ -1,0 +1,31 @@
+{
+  "name": "motion-studio-mvp",
+  "version": "0.4.0",
+  "private": true,
+  "main": "expo-router/entry",
+  "scripts": {
+    "start": "expo start",
+    "android": "expo run:android",
+    "ios": "expo run:ios",
+    "web": "expo start --web",
+    "typecheck": "tsc --noEmit",
+    "build:js": "babeljs --presets @babel/preset-env,@babel/preset-react,@babel/preset-typescript --extensions .ts,.tsx src --out-dir dist/src && babeljs --presets @babel/preset-env,@babel/preset-react,@babel/preset-typescript --extensions .ts,.tsx app --out-dir dist/app && babeljs --presets @babel/preset-env,@babel/preset-react,@babel/preset-typescript --extensions .ts,.tsx tests --out-dir dist/tests",
+    "test": "npm run build:js && node dist/tests/runAllTests.js",
+    "apk:debug": "cd android && ./gradlew assembleDebug",
+    "apk:release": "cd android && ./gradlew assembleRelease"
+  },
+  "dependencies": {
+    "expo": "~54.0.0",
+    "expo-router": "~6.0.0",
+    "expo-status-bar": "~3.0.0",
+    "react": "19.1.0",
+    "react-native": "0.81.4",
+    "react-native-safe-area-context": "~5.6.0",
+    "react-native-screens": "~4.16.0",
+    "@react-native-async-storage/async-storage": "2.2.0"
+  },
+  "devDependencies": {
+    "@types/react": "~19.1.10",
+    "typescript": "~5.9.2"
+  }
+}

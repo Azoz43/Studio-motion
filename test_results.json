@@ -1,0 +1,75 @@
+{
+  "timestamp": "2026-10-21T14:18:47.396Z",
+  "results": [
+    {
+      "id": "UT-01",
+      "name": "حساب موضع طبقة وتحويلاتها عند زمن معين (Layer position at time t)",
+      "status": "PASS",
+      "evidence": "At projectTime=1500ms (local=1000ms): x=100, y=-50, rotation=90deg, active=true",
+      "durationMs": 3
+    },
+    {
+      "id": "UT-02",
+      "name": "حساب الاستيفاء بين إطارين مفتاحيين (Linear, Ease, CubicBezier, Step)",
+      "status": "PASS",
+      "evidence": "t=500ms -> linear=50, easeIn=25, easeOut=75, cubicBezier=80.24, step(999ms)=10, step(1000ms)=90",
+      "durationMs": 0
+    },
+    {
+      "id": "UT-03",
+      "name": "التعامل مع القيم الزمنية خارج المدة (Out-of-bounds time handling)",
+      "status": "PASS",
+      "evidence": "Inactive @500ms (opacity=0), clamped pre-keyframe @1200ms (x=-50), clamped post-keyframe @2800ms (x=150), inactive @3500ms (opacity=0)",
+      "durationMs": 1
+    },
+    {
+      "id": "UT-04",
+      "name": "ترتيب الطبقات والقص والتقسيم والتقدم الإطاري (Layer ordering, trimming, splitting & frame step)",
+      "status": "PASS",
+      "evidence": "Painter order verified; moved layer to front; split 5000ms layer into 2000ms + 3000ms; frame step +3f @25fps -> 120ms",
+      "durationMs": 3
+    },
+    {
+      "id": "UT-05",
+      "name": "الحفظ الذري وإعادة التحميل وترقية المخطط (Atomic save, backup recovery & v1->v2 migration)",
+      "status": "PASS",
+      "evidence": "v1->v2 migrated losslessly; atomic save & reopen succeeded; corrupted primary recovered automatically from .bak (Legacy v1 Project)",
+      "durationMs": 16
+    },
+    {
+      "id": "UT-06",
+      "name": "رفض استيراد المشاريع غير الصالحة أو الخبيثة (Invalid project import rejection)",
+      "status": "PASS",
+      "evidence": "Rejected all 6 invalid/malformed project payloads cleanly with descriptive errors",
+      "durationMs": 6
+    },
+    {
+      "id": "UT-07",
+      "name": "استيراد صورة وفيديو وصوت والتحقق من البصمة الرقمية (Media import & magic-byte validation)",
+      "status": "PASS",
+      "evidence": "Imported PNG (120x80), MP4 (320x240, 2500ms), WAV (3000ms); rejected corrupt & traversal paths",
+      "durationMs": 1093
+    },
+    {
+      "id": "UT-08",
+      "name": "مزامنة مدة الصوت والفيديو ونقاط القص (Audio/video duration & trim synchronization)",
+      "status": "PASS",
+      "evidence": "Synced 2 audio tracks; audio track clamped to [start=500ms, dur=2500ms, in=200ms, out=2700ms, avgGain=0.75]",
+      "durationMs": 673
+    },
+    {
+      "id": "UT-09",
+      "name": "التصدير الفعلي إلى MP4 والتحقق من التقدم والإلغاء (Real MP4 Export & Cancellation)",
+      "status": "PASS",
+      "evidence": "Exported MP4 to integration_test_output.mp4 (62933 bytes, 640x480@20fps, 60 frames, 3s, codecs=h264/aac); cancellation verified.",
+      "durationMs": 2778
+    },
+    {
+      "id": "UT-10",
+      "name": "إعادة فتح الفيديو الناتج والتحقق من الحركة والنص والصورة والصوت (Reopen & Verify Exported MP4 Frames & Audio)",
+      "status": "PASS",
+      "evidence": "Decoded MP4 frames verified: static image RGB=0/227/162; moving shape X tracked (188px @0.4s -> 320px @1.5s -> 452px @2.6s); timed text pixels (0 @0.4s -> 3378 @1.5s -> 0 @2.6s).",
+      "durationMs": 1341
+    }
+  ]
+}
